@@ -7,7 +7,7 @@ snapback.sh <btrfs_subvol_path> <mounted_backup_UUID>
 ```
 
 #### Initial backup
-You must initialize a snapback repository ONCE per snapper config per UUID.
+You must initialize a snapback repository once per snapper config per UUID.
 If snapback is unable to find a previous snapshot, it will create and send a new initial snapshot.
 
 #### Example
