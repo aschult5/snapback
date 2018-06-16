@@ -31,7 +31,7 @@ fi
 
 # Create new snapshot
 echo "Creating snapshot for config '$CONFIG'"
-if ! NEW=$(snapper -c $CONFIG create -c number -d "backup $UTC_TS" -u "important=yes,backup=${UUID}" -p); then
+if ! NEW=$(snapper -c $CONFIG create -c number -d "backup $UTC_TS" -p); then
 	echo "FAIL: Could not create snapshot for config '$CONFIG'"
 	exit 2
 fi
@@ -59,3 +59,6 @@ fi
 
 mv ${DEST}/snapshot ${DEST}/${UTC_TS}
 echo "Done sending snapshot ${UTC_TS}"
+
+# Mark new snapshot as important after success so an incremental backup can be done
+snapper -c $CONFIG modify -u "important=yes,backup=${UUID}" ${NEW}
